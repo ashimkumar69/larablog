@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,22 +11,26 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .sass('resources/assets/sass/libs/app.scss', 'public/css/newapp.css')
-    .styles([
-        'resources/assets/css/libs/blog-post.css',
-        'resources/assets/css/libs/bootstrap.css',
-        'resources/assets/css/libs/font-awesome.css',
-        'resources/assets/css/libs/metisMenu.css',
-        'resources/assets/css/libs/sb-admin-2.css',
-    ],'public/css/libs.css')
-    .scripts([
-        'resources/assets/js/libs/jquery.js',
-        'resources/assets/js/libs/bootstrap.js',
-        'resources/assets/js/libs/metisMenu.js',
-        'resources/assets/js/libs/sb-admin-2.js',
-        'resources/assets/js/libs/scripts.js',
-    ],'public/js/libs.js');
-
-
+mix.js("resources/js/app.js", "public/js")
+    .sass("resources/sass/app.scss", "public/css")
+    .sass("resources/assets/sass/libs/app.scss", "public/css/newapp.css")
+    .styles(
+        [
+            "resources/assets/css/libs/bootstrap.css",
+            "resources/assets/css/libs/blog-post.css",
+            "resources/assets/css/libs/font-awesome.css",
+            "resources/assets/css/libs/metisMenu.css",
+            "resources/assets/css/libs/sb-admin-2.css"
+        ],
+        "public/css/libs.css"
+    )
+    .scripts(
+        [
+            "resources/assets/js/libs/jquery.js",
+            "resources/assets/js/libs/bootstrap.js",
+            "resources/assets/js/libs/metisMenu.js",
+            "resources/assets/js/libs/sb-admin-2.js",
+            "resources/assets/js/libs/scripts.js"
+        ],
+        "public/js/libs.js"
+    );
