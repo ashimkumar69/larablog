@@ -6,7 +6,6 @@ use App\Http\Requests\UserRequest;
 use App\Photo;
 use App\Role;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -79,7 +78,11 @@ class AdminUsersController extends Controller
      */
     public function edit($id)
     {
-        return view("admin.users.edit");
+
+        return view("admin.users.edit",      [
+            "users" => User::find($id),
+            "roles" => Role::select("id", "name")->get(),
+        ]);
     }
 
     /**
@@ -89,9 +92,22 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $user = User::find($id);
+        $input = $request->all();
+
+        if ($file = $request->file("photo_id")) {
+            $imagename = time() . $file->getClientOriginalName();
+            $file->move("images", $imagename);
+            $photo = Photo::create(["file" => $imagename]);
+
+            $input["photo_id"] = $photo->id;
+        }
+        $input["password"] = Hash::make($request->password);
+
+        $user->update($input);
+        return redirect()->back()->with(["message" => "User Created Successfully"]);
     }
 
     /**
