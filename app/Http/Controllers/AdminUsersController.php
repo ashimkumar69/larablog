@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Photo;
 use App\Role;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminUsersController extends Controller
 {
@@ -39,9 +42,21 @@ class AdminUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(UserRequest $request)
     {
-        User::create($request->all());
+        $input = $request->all();
+
+        if ($file = $request->file("photo_id")) {
+            $imagename = time() . $file->getClientOriginalName();
+            $file->move("images", $imagename);
+            $photo = Photo::create(["file" => $imagename]);
+
+            $input["photo_id"] = $photo->id;
+        }
+        $input["password"] = Hash::make($request->password);
+
+        User::create($input);
         return redirect()->route("users.index")->with(["message" => "User Created Successfully"]);
     }
 
