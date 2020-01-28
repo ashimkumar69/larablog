@@ -17,11 +17,23 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-//recoure route for admin/user
-Route::resource('/admin/users', 'AdminUsersController');
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/404', function () {
+    return view('errors.404');
+})->name('404');
 
 Route::get('/admin', function () {
     return view('admin.index');
+})->name('admin');
+
+//recoure route for admin/user
+Route::group(['middleware' => 'web'], function () {
+
+
+
+    Route::group(['middleware' => 'admin'], function () {
+
+        Route::resource('/admin/users', 'AdminUsersController');
+        Route::resource('/admin/posts', 'AdminPostsController');
+    });
 });

@@ -20,6 +20,15 @@
 </div>
 @endif
 
+@if (session('delete_user'))
+<div class="alert alert-danger alert-dismissible" role="alert">
+    {{ session('delete_user') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
+
 {{-- @error('name')
 <span class="text-danger">{{ $message }}</span>
 @enderror --}}

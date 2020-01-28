@@ -37,11 +37,15 @@
                     <td>{{ $user->created_at->diffForHumans() }}</td>
                     <td>{{ $user->updated_at->diffForHumans() }}</td>
                     <td>
-                        <div class="btn-group" role="group" aria-label="">
-                            <a href="{{ route('users.edit',$user->id)}}" type="button"
-                                class="btn btn-info">Edit</a>
-                            <button type="button" class="btn btn-danger">Delete</button>
-                        </div>
+                        <form action="{{ route('users.destroy',$user->id)}}" method="POST">
+                            <div class="btn-group" role="group" aria-label="">
+                                <a href="{{ route('users.edit',$user->id)}}" type="button" class="btn btn-info">Edit</a>
+
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </div>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
