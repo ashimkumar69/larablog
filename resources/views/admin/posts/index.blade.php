@@ -29,7 +29,7 @@
                 <tr>
                     <th>{{ $index+1 }}</th>
                     <td>{{ $posts->user->name }}</td>
-                    <td>{{ $posts->category_id }}</td>
+                    <td>{{ $posts->category->name }}</td>
                     <td><img width="60px" height="60px" src="{{ $posts->photo ? $posts->photo->file : "No Image" }}"
                             class="img-responsive img-rounded img-thumbnail" alt="Photo"></td>
                     <td>{{ $posts->title }}</td>
