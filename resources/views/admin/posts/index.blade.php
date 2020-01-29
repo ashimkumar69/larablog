@@ -4,7 +4,7 @@
 @include('include.message')
 <div class="panel panel-default">
     <div class="panel-heading text-center">
-        All Users
+        All Posts
     </div>
     <div class="panel-body">
         <table class="table table-bordered">
@@ -24,26 +24,26 @@
             <tbody>
 
                 @if ($posts)
-                @foreach ($posts as $index => $posts)
+                @foreach ($posts as $index => $post)
 
                 <tr>
                     <th>{{ $index+1 }}</th>
-                    <td>{{ $posts->user->name }}</td>
-                    <td>{{ $posts->category->name }}</td>
-                    <td><img width="60px" height="60px" src="{{ $posts->photo ? $posts->photo->file : "No Image" }}"
+                    <td>{{ $post->user->name }}</td>
+                    <td>{{ $post->category->name }}</td>
+                    <td><img width="60px" height="60px" src="{{ $post->photo ? $post->photo->file : "No Image" }}"
                             class="img-responsive img-rounded img-thumbnail" alt="Photo"></td>
-                    <td>{{ $posts->title }}</td>
-                    <td>{{ $posts->body }}</td>
-                    <td>{{ $posts->created_at->diffForHumans() }}</td>
-                    <td>{{ $posts->updated_at->diffForHumans() }}</td>
+                    <td>{{ $post->title }}</td>
+                    <td>{{ Str::limit($post->body,7) }}</td>
+                    <td>{{ $post->created_at->diffForHumans() }}</td>
+                    <td>{{ $post->updated_at->diffForHumans() }}</td>
                     <td>
-                        <form action="" method="POST">
+                        <form action="{{ route('posts.destroy',$post->id)}} " method="POST">
                             <div class="btn-group" role="group" aria-label="">
-                                <a href="" type="button" class="btn btn-info">Edit</a>
+                                <a href="{{ route('posts.edit',$post->id)}}" type="button" class="btn btn-info">Edit</a>
 
                                 @csrf
-                                @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
+                                @method('DELETE')
                             </div>
                         </form>
                     </td>

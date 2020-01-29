@@ -106,7 +106,7 @@ class AdminUsersController extends Controller
 
 
         if ($file = $request->file("photo_id")) {
-            
+
             unlink(public_path() . $user->photo->file);
             $imagename = time() . $file->getClientOriginalName();
             $file->move("images", $imagename);
@@ -131,7 +131,7 @@ class AdminUsersController extends Controller
         $user = User::find($id);
         unlink(public_path() . $user->photo->file);
         $user->delete();
-        Session::flash('delete_user', 'User Deleted Successfully');
+        Session::flash('delete_user', 'Post Deleted Successfully');
 
         return redirect()->route('users.index');
     }

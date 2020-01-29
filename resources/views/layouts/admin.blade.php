@@ -172,7 +172,7 @@
                                         class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="/categories">All Categories</a>
+                                        <a href="{{ route("category.index") }}">All Categories</a>
                                     </li>
 
                                     <li>

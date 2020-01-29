@@ -7,7 +7,7 @@
 <div class="panel panel-default">
 
     <div class="panel-heading text-center">
-        Create User
+        Create Posts
     </div>
     <div class="panel-body">
         <form action="{{ route('posts.store')}}" method="POST" enctype="multipart/form-data">
