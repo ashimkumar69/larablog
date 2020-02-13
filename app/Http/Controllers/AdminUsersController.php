@@ -106,8 +106,10 @@ class AdminUsersController extends Controller
 
 
         if ($file = $request->file("photo_id")) {
+            if ($user->photo_id != null) {
+                unlink(public_path() . $user->photo->file);
+            }
 
-            unlink(public_path() . $user->photo->file);
             $imagename = time() . $file->getClientOriginalName();
             $file->move("images", $imagename);
             $photo = Photo::create(["file" => $imagename]);

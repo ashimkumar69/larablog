@@ -2,3 +2,7 @@
   padding-top: 0px;
 }
 
+.comment_reply_container {
+  display: none;
+}
+

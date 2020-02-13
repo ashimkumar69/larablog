@@ -45,6 +45,9 @@
                                 <button type="submit" class="btn btn-danger">Delete</button>
                                 @method('DELETE')
                             </div>
+                            <a class="btn btn-primary" href="{{ route('home.post',$post->slug) }}">View Post</a>
+                            <a class="btn btn-primary" href="{{ route('comments.show',$post->id) }}">View
+                                Comments</a>
                         </form>
                     </td>
                 </tr>
@@ -53,6 +56,11 @@
                 @endif
             </tbody>
         </table>
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-5">
+                {{ $posts->render() }}
+            </div>
+        </div>
     </div>
 </div>
 

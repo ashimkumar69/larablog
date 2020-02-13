@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Comment;
 use App\Http\Requests\PostCreateRequest;
 use App\Photo;
 use App\Post;
@@ -20,7 +21,7 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(10);
 
         return view("admin.posts.index", compact("posts"));
     }
@@ -127,5 +128,12 @@ class AdminPostsController extends Controller
         Session::flash('delete_user', 'User Deleted Successfully');
 
         return redirect()->route('posts.index');
+    }
+
+    public function post($slug)
+    {
+        $post = Post::findBySlugOrFail($slug);
+        $comments = $post->comments()->whereIsActive(1)->get();
+        return view('post', compact('post', 'comments'));
     }
 }

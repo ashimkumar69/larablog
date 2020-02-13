@@ -3,6 +3,7 @@
 @section('content')
 
 @include('include.message')
+@include('include.tinyeditor')
 
 <div class="panel panel-default">
 
